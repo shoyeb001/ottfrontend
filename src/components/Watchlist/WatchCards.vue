@@ -1,13 +1,15 @@
 <template>
     <div>
-            <img :src="`${img}`" class="card-img" alt="">
-            <div class="card-body">
-                <!-- <div class="name">{{ title }}</div> -->
-                <router-link style="text-decoration: none;" :to="`/movie/${id}`">  <span class="name">{{ title }}</span>
-                <div class="des">{{ description }}</div>        </router-link>
 
-                <button class="watchlist-btn" @click="AddtoWatchlist()">add to watchlist</button>
-            </div>
+        <img :src="`${movie.poster}`" class="card-img" alt="">
+        <div class="card-body">
+            <!-- <div class="name">{{ title }}</div> -->
+            <router-link style="text-decoration: none;" :to="`/movie/${movie_id}`"><span class="name">{{ movie.title }}</span>
+                <div class="des">{{ movie.description }}</div>
+            </router-link>
+
+            <button class="watchlist-btn" @click="RemoveWatchlist()">Remove from watchlist</button>
+        </div>
     </div>
 </template>
 
@@ -15,16 +17,20 @@
 import axios from 'axios';
 import config from '../../config';
 export default {
-    name: "Card",
+    name: "WatchCards",
     props: {
-        img: String,
-        title: String,
-        description: String,
-        id: String
+        id: String,
+        user_id: String,
+        movie_id: String,
+        UpdateData: Function,
+    },
+    data() {
+        return {
+            movie: []
+        }
     },
     methods: {
-        async AddtoWatchlist() {
-            const user_id = localStorage.getItem("user_id");
+        async RemoveWatchlist() {
             const token = JSON.parse(localStorage.getItem('user'));
             // console.log(token);
             const headers = {
@@ -32,17 +38,23 @@ export default {
                 'Authorization': `Bearer ${token}`,
             };
 
-            const data={
-                user_id : user_id,
-                movie_id : this.id
-            }
-
-            const watchlist = await axios.post(`${config.url}/watchlist/add/${user_id}`,data,{headers:headers});
-            if (watchlist) {
-                alert(watchlist.data.msg);
-            }
-
+            const data = await axios.delete(`${config.url}/watchlist/delete/${this.user_id}/${this.movie_id}`, { headers: headers });
+            console.log(data);
+            this.UpdateData();
         }
+    },
+    async mounted() {
+        const user_id = localStorage.getItem("user_id");
+        const token = JSON.parse(localStorage.getItem('user'));
+        // console.log(token);
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        };
+
+        const movie = await axios.get(`${config.url}/movie/details/${this.user_id}/${this.movie_id}`, { headers: headers });
+        this.movie = movie.data[0];
+        // console.log(movie.data[0]);
     }
 }
 </script>
@@ -93,9 +105,7 @@ export default {
     font-size: 15px;
     font-weight: 500;
     text-transform: capitalize;
-    /* margin-top: 60%; */
-    margin-top: 63px;
-    display: block;
+    margin-top: 60%;
 }
 
 .des {

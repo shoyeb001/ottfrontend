@@ -21,7 +21,12 @@ export default {
     components:{
         Card,
     },
-    mounted() {
+    data(){
+        return{
+            movies:[]
+        }
+    },
+    async mounted() {
         let cardContainers = [...document.querySelectorAll('.card-container')];
         let preBtns = [...document.querySelectorAll('.pre-btn')];
         let nxtBtns = [...document.querySelectorAll('.nxt-btn')];
@@ -42,6 +47,16 @@ export default {
                 item.scrollLeft -= containerWidth + 200;
             })
         })
+        const user_id = localStorage.getItem("user_id");
+        const token = JSON.parse(localStorage.getItem('user'));
+        console.log(token);
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        };
+
+        const movies = await axios.get(`${config.url}/movie/genre/${user_id}/Thriller`,{headers:headers});
+        this.kids = movies.data;
     }
 }
 </script>

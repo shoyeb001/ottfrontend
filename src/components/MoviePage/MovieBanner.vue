@@ -6,12 +6,12 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="content">
-                                <h1>Freddy</h1>
-                                <h6>2 hr 3 min . 2022 . Drama . Hindi</h6>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem numquam porro aspernatur saepe, similique hic magni.</p>
-                                <button class="watch"><i class="fa fa-play" aria-hidden="true"></i> Watch Movie</button>
+                                <h1>{{ movie.title }}</h1>
+                                <h6>{{ movie.duration+" Mins" }} . {{ genre }} . {{ language }}</h6>
+                                <p>{{ movie.description }}</p>
+                                <router-link style="text-decoration: none;" :to="`/movie/play/${movie._id}`" class="watch"><i class="fa fa-play" aria-hidden="true"></i> Watch Movie</router-link>
                                 <div class="utils">
-                                    <div class="watch-list">
+                                    <div class="watch-list"  @click="AddToWatchlist()">
                                         <i class="fa fa-plus"></i><br>
                                         <span>Watch List</span>
                                     </div>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="col-8">
-                            <img src="../../assets/img/children.png" class="d-block w-100">
+                            <img :src="`${movie.thumbnail}`" class="d-block w-100">
                         </div>
                     </div>
                 </div>
@@ -33,17 +33,50 @@
 </template>
 
 <script>
+import axios from 'axios';
+import config from "../../config";
 export default {
     name: "MovieBanner",
     data() {
+        return{
+
+        }
+    },
+    props:{
+        movie:Object,
+        genre:String,
+        language:String
+    },
+    methods:{
+        async AddToWatchlist(){
+            const user_id = localStorage.getItem("user_id");
+            const token = JSON.parse(localStorage.getItem('user'));
+            // console.log(token);
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            };
+
+            const data={
+                user_id : user_id,
+                movie_id : this.movie._id,
+            }
+
+            const watchlist = await axios.post(`${config.url}/watchlist/add/${user_id}`,data,{headers:headers});
+            if (watchlist) {
+                alert(watchlist.data.msg);
+            }
+        }
+    },
+    async mounted(){
+       
     }
 }
 </script>
 
 <style scoped>
 .slider {
-    margin-top: 79px;
-    height: 444px;
+    min-height: 444px;
     max-width: 1200px;
     margin: auto;
     margin-top: 79px;
@@ -81,6 +114,7 @@ i{
     margin-top: 30px;
     color: #fff;
     padding-left: 55px;
+    border: none;
 }
 
 .watch-list, .share{
