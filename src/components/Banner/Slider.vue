@@ -111,4 +111,11 @@ export default {
     height: 100%;
     background-size: cover;
 }
+
+@media (max-width:600px) {
+   .slider{
+    height: 346px;
+   }
+   
+}
 </style>

@@ -5,6 +5,7 @@
         <TrendingCards />
         <GenreMovies v-for="item in genre" :name="item.name"/>
         <!-- <MovieCards /> -->
+        <FooterNav/>
     </div>
 </template>
 
@@ -20,6 +21,7 @@ import ActionMovies from '../components/MovieCards/ActionMovies.vue'
 import ThrillerMovies from '../components/MovieCards/ThrillerMovies.vue';
 import KidsCards from '../components/MovieCards/KidsCards.vue';
 import GenreMovies from '../components/MovieCards/GenreMovies.vue';
+import FooterNav from '../components/Navbar/FooterNav.vue';
 export default {
     name: "HomePage",
     components: {
@@ -31,7 +33,8 @@ export default {
         ActionMovies,
         ThrillerMovies,
         KidsCards,
-        GenreMovies
+        GenreMovies,
+        FooterNav,
     },
     inject: ["store"],
     data() {

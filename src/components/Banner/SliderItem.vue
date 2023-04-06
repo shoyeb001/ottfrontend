@@ -96,4 +96,27 @@ export default {
     padding-left: 55px;
 
 }
+@media (max-width:600px) {
+    .col-4{
+    width: 50% !important;
+   }
+   .col-8{
+    width: 50% !important;
+   }
+   h1{
+    font-size: 22px;
+    padding-top: 18px;
+   }
+   h6{
+    font-size: 15px;
+   }
+   p{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    white-space: normal;
+   }
+}
 </style>

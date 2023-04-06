@@ -36,6 +36,7 @@
             </div>
         </nav>
     </div>
+    
 </template>
 
 <script>
@@ -207,8 +208,13 @@ h6 {
 
 .des {
     text-overflow: ellipsis;
+    overflow: hidden;
     padding: 0px 8px;
     font-size: 13px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    white-space: normal;
 }
 
 .result .col-4,
@@ -219,6 +225,25 @@ h6 {
 @media (max-width:800px) {
     .nav-links {
         display: none;
+    }
+}
+
+@media (max-width:720px) {
+    .brand-logo{
+        height: 45px;
+    }
+    .right-container{
+        margin-left: none;
+    }
+    .right-container .search-box{
+        width: 215px;
+    }
+    .right-container .search-box .sub-btn{
+        padding: 0 10px;
+    }
+    .search-field{
+        position: initial;
+        
     }
 }
 </style>
