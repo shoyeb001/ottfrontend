@@ -11,7 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <HelloWorld msg="You did it!" />
     </div>
   </header> -->
-  <RouterView :key="$route.path"/>
+  <RouterView/>
 </template>
 
 <style scoped>
