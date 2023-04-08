@@ -102,4 +102,10 @@ h2{
     outline-offset: -2px;
     width: 3em;
 }
+
+@media (max-width:700px) {
+    h1{
+        font-size: 2.125rem !important;
+    }
+}
 </style>

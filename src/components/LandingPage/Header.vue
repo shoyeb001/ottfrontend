@@ -148,4 +148,26 @@ export default {
     color: #fff;
 }
 
+@media (max-width:700px) {
+    
+    .subsctiption h1{
+        font-size: 2.125rem;
+    }
+    .subsctiption h1{
+        padding: 0;
+    }
+
+    .subsctiption .email-input{
+        height: 50px;
+    }
+    .subsctiption .email-input .input-box{
+        height: 100%;
+    }
+
+    .subsctiption .email-input .subs-btn .btn{
+        font-size: 0.6rem;
+    }
+
+}
+
 </style>

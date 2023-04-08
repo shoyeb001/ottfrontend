@@ -55,4 +55,9 @@ h2{
 .img-container .img{
     width: 100%;
 }
+@media (max-width:700px) {
+    h1{
+        font-size: 2.125rem !important;
+    }
+}
 </style>

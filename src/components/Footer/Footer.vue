@@ -5,6 +5,7 @@
                 <p>Questions? Call 000-800-040-1843</p>
                 <div class="col-md-3">
                     <ul>
+                        <li><router-link to="/home">Home</router-link></li>
                         <li><a class="links" href="#">FAQ</a></li>
                         <li><a class="links" href="#">Investor Relations</a></li>
                         <li><a class="links" href="#">Privacy</a></li>
