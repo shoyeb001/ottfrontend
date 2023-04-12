@@ -28,7 +28,7 @@
                     <div class="mb-3 button1">
                         <button class="btn btn1" @click="SignIn">Sign In</button>
                     </div>
-                    <span>New to Netflix?<a href="#" class="link">Sign Up Now</a></span>
+                    <span>New to Netflix?<router-link to="/signup/step/one" class="link">Sign Up Now</router-link></span>
                 </div>
             </div>
         </div>

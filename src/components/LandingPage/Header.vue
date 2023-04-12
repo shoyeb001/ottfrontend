@@ -21,7 +21,7 @@
                                 <input class="input" type="email">
                             </div>
                             <div class="subs-btn">
-                                <button class="btn">Subscribe ></button>
+                                <button @click="ToSignin()" class="btn">Subscribe ></button>
                             </div>
                         </div>
                 </div>
@@ -33,6 +33,11 @@
 <script>
 export default {
     name: "Header",
+    methods:{
+        ToSignin(){
+            this.$router.push("/signup/step/one");
+        }
+    }
 }
 </script>
 

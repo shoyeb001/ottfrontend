@@ -245,5 +245,8 @@ h6 {
         position: initial;
         
     }
+    .sub-btn{
+        padding: 0 13px;
+    }
 }
 </style>

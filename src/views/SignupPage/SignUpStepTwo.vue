@@ -20,13 +20,13 @@
                             <div class="pricing-plan">
                                 <img src="https://preview.redd.it/gj1t3nckxyx61.png?auto=webp&s=a0925041ccf11f7453ba4b27cfec24afa0f34594"
                                     alt="" class="pricing-img">
-                                <h2 class="pricing-header">Premium</h2>
+                                <h2 class="pricing-header">Test</h2>
                                 <ul class="pricing-features">
                                     <li class="pricing-features-item">HD 1080P Video</li>
                                     <li class="pricing-features-item">All Content</li>
                                     <li class="pricing-features-item">Watch on Tv or Laptop</li>
                                 </ul>
-                                <span class="pricing-price">RS 299/Mo</span>
+                                <span class="pricing-price">RS 299/H</span>
                                 <stripe-checkout ref="checkoutRef" mode="payment" :pk="publishableKey"
                                     :line-items="lineItems" :success-url="successURL" :cancel-url="cancelURL"
                                     @loading="v => loading = v" />
@@ -36,13 +36,13 @@
                             <div class="pricing-plan">
                                 <img src="https://preview.redd.it/gj1t3nckxyx61.png?auto=webp&s=a0925041ccf11f7453ba4b27cfec24afa0f34594"
                                     alt="" class="pricing-img">
-                                <h2 class="pricing-header">Super Yearly</h2>
+                                <h2 class="pricing-header">Super</h2>
                                 <ul class="pricing-features">
                                     <li class="pricing-features-item">HD 720P Video</li>
                                     <li class="pricing-features-item">All Content</li>
-                                    <li class="pricing-features-item">Watch on Mobile</li>
+                                    <li class="pricing-features-item">Watch on Tv or Laptop</li>
                                 </ul>
-                                <span class="pricing-price">RS 899/Yr</span>
+                                <span class="pricing-price">RS 899/Mo</span>
                                 <button @click="ContinueTwo()" class="pricing-button">Continue</button>
                             </div>
 
@@ -56,7 +56,7 @@
                                     <li class="pricing-features-item">Watch on Tv or Laptop</li>
                                 </ul>
                                 <span class="pricing-price">RS 1599/Yr</span>
-                                <a @click="ContinueThree()" class="pricing-button">Continue</a>
+                                <button @click="ContinueThree()" class="pricing-button">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -67,40 +67,58 @@
 </template>
 
 <script>
-import { StripeCheckout } from '@vue-stripe/vue-stripe';
+import axios from 'axios';
+import config from '../../config';
+async function UserRegister() {
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+    const valid = localStorage.getItem("valid");
+    const price = localStorage.getItem("price");
+    let id;
+    const user = {
+        email,
+        password,
+        status: true,
+        valid: Date.now() + valid,
+        type: "user"
+    };
+
+    const save_user = await axios.post(`${config.url}/user/register`, user);
+    if (save_user) {
+        localStorage.clear();
+        this.$router.push("/payment/success");
+    }
+
+}
 export default {
     name: "SignUpStepTwo",
-    components:{
-        StripeCheckout,
-    },
+    // components:{
+    //     StripeCheckout,
+    // },
     data() {
-        this.publishableKey= "pk_test_51IfK2tSIW2IngVquO4aCYw9P6TwzoyIBiZl75euDhL7I2FaonvY5p7vDYuY88KwKISUn5cW39eYTNjfjHSTNUpbd00PA44BuxT";
         return {
-            loading: false,
-            lineItems: [
-                {
-                    price: '', // The id of the one-time price you created in your Stripe dashboard
-                    quantity: 1,
-                },
-            ],
-            successURL: 'http://localhost:5173/payment/success',
-            cancelURL: 'http://localhost:5173/payment/cancel',
-        };
+
+        }
     },
     methods: {
         ContinueOne() {
-            this.lineItems[0].price='price_1Mf3WgSIW2IngVquaxY1DW06';
-            localStorage.setItem("price",299);
-            localStorage.setItem("valid",30);
-            this.$refs.checkoutRef.redirectToCheckout();
+            localStorage.setItem("price", 299);
+            localStorage.setItem("valid", 1 * 60 * 60 * 1000);
+            UserRegister()
 
         },
-        ContinueTwo(){
-            this.lineItems[0].price='price_1Mf3WgSIW2IngVquaxY1DW06';
+        ContinueTwo() {
+            localStorage.setItem("price", 899);
+            localStorage.setItem("valid", 30 * 24 * 60 * 60 * 1000);
+            UserRegister()
         },
-        ContinueThree(){
-            this.lineItems[0].price='price_1Mf3WgSIW2IngVquaxY1DW06';
-        }
+        ContinueThree() {
+            localStorage.setItem("price", 1599);
+            localStorage.setItem("valid", 365 * 24 * 60 * 60 * 1000);
+            UserRegister()
+        },
+
+
     }
 }
 </script>
@@ -299,5 +317,9 @@ export default {
 .pricing-button.is-featured:hover,
 .pricing-button.is-featured:active {
     background-color: #269aff;
+}
+
+.pricing-button {
+    background: none;
 }
 </style>

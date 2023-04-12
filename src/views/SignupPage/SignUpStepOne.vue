@@ -29,7 +29,7 @@
                         <div class="mb-3 button1">
                             <button class="btn btn1" @click="Submit()">Next</button>
                         </div>
-                        <span>Already have account?<a href="#" class="link">Sign In Now</a></span>
+                        <span>Already have account?<router-link to="/signin" class="link">Sign In Now</router-link></span>
                     </div>
                 </div>
             </div>
