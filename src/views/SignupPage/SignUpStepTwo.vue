@@ -86,7 +86,7 @@ async function UserRegister() {
     const save_user = await axios.post(`${config.url}/user/register`, user);
     if (save_user) {
         localStorage.clear();
-        this.$router.push("/payment/success");
+      
     }
 
 }
@@ -105,17 +105,20 @@ export default {
             localStorage.setItem("price", 299);
             localStorage.setItem("valid", 1 * 60 * 60 * 1000);
             UserRegister()
+            this.$router.push("/payment/success");
 
         },
         ContinueTwo() {
             localStorage.setItem("price", 899);
             localStorage.setItem("valid", 30 * 24 * 60 * 60 * 1000);
             UserRegister()
+            this.$router.push("/payment/success");
         },
         ContinueThree() {
             localStorage.setItem("price", 1599);
             localStorage.setItem("valid", 365 * 24 * 60 * 60 * 1000);
             UserRegister()
+            this.$router.push("/payment/success");
         },
 
 

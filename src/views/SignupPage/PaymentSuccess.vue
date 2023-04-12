@@ -16,7 +16,7 @@
                 <div class="singin card">
                     <div class="container">
                         <h2>Your Payment Success</h2>
-                        <span>Already have account?<a href="#" class="link">Sign In Now</a></span>
+                        <span>Already have account?<router-link to="/signin" class="link">Sign In Now</router-link></span>
                     </div>
                 </div>
             </div>

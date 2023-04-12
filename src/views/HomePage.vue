@@ -55,7 +55,7 @@ export default {
         }
     },
 
-    async mounted() {
+    async created() {
         if (this.store.state.islogged == false) {
             this.$router.push("/signin");
         }
