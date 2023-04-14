@@ -19,12 +19,13 @@
                         <div class="mb-3">
                             <input type="email" class="form-control" id="exampleFormControlInput1"
                                 placeholder="Enter your email" v-model="email" aria-describedby="inputGroup-sizing-lg">
-                            <p class="error">Please Input Valid UserId</p>
+                            <p class="error">{{ error1 }}</p>
                         </div>
                         <div class="mb-3">
                             <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Enter your password" v-model="password" aria-describedby="inputGroup-sizing-lg">
-                            <p class="error">Please Input valid password</p>
+                                placeholder="Enter your password" v-model="password"
+                                aria-describedby="inputGroup-sizing-lg">
+                            <p class="error">{{ error2 }}</p>
                         </div>
                         <div class="mb-3 button1">
                             <button class="btn btn1" @click="Submit()">Next</button>
@@ -41,17 +42,27 @@
 <script>
 export default {
     name: "SignUpStepOne",
-    data(){
-        return{
-            email:'',
-            password:'',
+    data() {
+        return {
+            email: '',
+            password: '',
+            error1: '',
+            error2: '',
         }
     },
-    methods:{
-        Submit(){
-            localStorage.setItem("email",this.email);
-            localStorage.setItem("password",this.password);
-            this.$router.push({ name: "Signup Step Two" });
+    methods: {
+        Submit() {
+            const email = this.email;
+            const password = this.password;
+            if (email == "") {
+                this.error1 = "Please enter email"
+            } else if (password == "") {
+                this.error2 = "Please enter password"
+            } else {
+                localStorage.setItem("email", this.email);
+                localStorage.setItem("password", this.password);
+                this.$router.push({ name: "Signup Step Two" });
+            }
         }
     }
 }
@@ -64,7 +75,7 @@ export default {
 
 .header {
     width: 100%;
-    height: 721px;
+    height: 100vh;
     background-image: url("../../assets/img/landing_bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -82,7 +93,7 @@ export default {
 .header .header-nav {
     width: 95%;
     margin: auto;
-    height: 721px;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;

@@ -46,6 +46,7 @@ export default {
 .player-page {
     background: linear-gradient(to bottom, #192133, #111826);
     font-family: "Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif";
+    height: 100vh;
 }
 
 .video {

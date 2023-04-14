@@ -83,7 +83,7 @@ export default {
 
 .header {
     width: 100%;
-    height: 721px;
+    height: 100vh;
     background-image: url("../../assets/img/landing_bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;

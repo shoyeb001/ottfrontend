@@ -151,7 +151,7 @@ export default {
 .header .header-nav {
     width: 95%;
     margin: auto;
-    height: 1300px;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
